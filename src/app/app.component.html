@@ -1,12 +1,27 @@
-<tui-root>
-  <header tuiHeader="h1">
+<tui-root class="layout">
+  <header tuiHeader="h3">
     <hgroup tuiTitle>
-      <h1>{{ title }}</h1>
-      <p tuiSubtitle>list</p>
+      <h3>{{ username }}'s To Do List</h3>
     </hgroup>
     <aside tuiAccessories>
-      <tui-badge-notification>1</tui-badge-notification>
-      <button size="l" tuiButton type="button">Button</button>
+      <tui-badged-content>
+        <tui-badge-notification size="s" tuiSlot="top">
+          99
+        </tui-badge-notification>
+        <tui-icon
+          appearance="accent"
+          icon="@tui.list-checks"
+          size="l"
+          tuiBadge
+          [style.color]="'var(--tui-background-accent-opposite)'"
+        />
+      </tui-badged-content>
     </aside>
   </header>
+
+  <tui-textfield class="tui-space_top-5">
+    <label tuiLabel>Click icon to copy</label>
+    <input placeholder="add new item" tuiTextfield [(ngModel)]="value" />
+    <tui-icon icon="@tui.copy" tuiCopy />
+  </tui-textfield>
 </tui-root>
