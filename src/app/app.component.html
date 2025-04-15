@@ -1,12 +1,12 @@
 <tui-root class="layout">
-  <header tuiHeader="h3">
+  <header tuiHeader="h3" [style.margin-bottom.rem]="2">
     <hgroup tuiTitle>
       <h3>{{ username }}'s To Do List</h3>
     </hgroup>
     <aside tuiAccessories>
       <tui-badged-content>
         <tui-badge-notification size="s" tuiSlot="top">
-          99
+          {{ itemCount }}
         </tui-badge-notification>
         <tui-icon
           appearance="accent"
@@ -19,9 +19,58 @@
     </aside>
   </header>
 
-  <tui-textfield class="tui-space_top-5">
-    <label tuiLabel>Click icon to copy</label>
-    <input placeholder="add new item" tuiTextfield [(ngModel)]="value" />
-    <tui-icon icon="@tui.copy" tuiCopy />
+  <tui-textfield class="add-input" [style.margin-bottom.rem]="2">
+    <input placeholder="add new item" tuiTextfield #todoText />
+    <button
+      appearance="primary"
+      size="s"
+      tuiButton
+      type="button"
+      (click)="addItem(todoText.value); todoText.value = ''"
+    >
+      add
+    </button>
   </tui-textfield>
+
+  <table
+    tuiTable
+    class="items-list"
+    size="l"
+    [columns]="['task', 'complete']"
+    [style.width.%]="100"
+    [style.margin-bottom.rem]="2"
+  >
+    <thead>
+      <tr tuiThGroup>
+        <th tuiTh [resizable]="true">Task</th>
+        <th tuiTh>Done</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody [data]="items">
+      <tr *ngFor="let item of items" tuiTr>
+        <td *tuiCell="'task'" tuiTd>
+          {{ item.task }}
+        </td>
+        <td *tuiCell="'complete'" tuiTd>
+          <input
+            tuiCheckbox
+            type="checkbox"
+            [(ngModel)]="item.complete"
+            size="m"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div tuiCell="m">
+    <input
+      tuiSwitch
+      type="checkbox"
+      [(ngModel)]="showComplete"
+      size="m"
+      [style.textAlign]="'center'"
+    />
+    <span tuiTitle> Show Completed Items </span>
+  </div>
 </tui-root>
