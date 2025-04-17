@@ -1,0 +1,96 @@
+
+  <main>
+    <header tuiHeader>
+        <hgroup tuiTitle>
+            <h5>Sports Store</h5>
+        </hgroup>
+        <aside tuiAccessories>
+            <tui-badge-notification>1</tui-badge-notification>
+            <tui-icon tuiTooltip="Angular kit" />
+            <tui-avatar
+                appearance="accent"
+                src="@tui.star"
+            />
+        </aside>
+    </header>
+
+    <div class="grid">
+      <div class="categories">
+        <form
+            orientation="vertical"
+            tuiGroup
+            class="group"
+            [collapsed]="true"
+            [formGroup]="categoryForm"
+        >
+            <label tuiBlock>
+                <input
+                    formControlName="categoryValue"
+                    tuiRadio
+                    type="radio"
+                    value="home"
+                    (change)="changeCategory()"
+                />
+                Home
+            </label>
+            <label tuiBlock *ngFor="let cat of categories()">
+                <input
+                    formControlName="categoryValue"
+                    tuiRadio
+                    type="radio"
+                    [value]="cat"
+                    (change)="changeCategory(cat)"
+                />
+                    {{ cat }}
+            </label>
+        </form>
+      </div>
+      <div class="products-list">
+        <div
+          tuiCell="l"
+          *ngFor="let product of pagedProducts()"
+          class="product"
+        >
+          <div tuiTitle>
+            {{ product.name }}
+            <div tuiSubtitle>{{ product.description }}</div>
+          </div>
+          <div>
+            <tui-badge
+              appearance="primary"
+              size="l"
+            >
+              {{ product.price | currency: "USD" : "symbol" : "2.2-2" }}
+            </tui-badge>
+            </div>
+        </div>
+        <div class="pager">
+          <div class="page-size">
+            <tui-textfield tuiChevron
+              class="products-per-page"
+              [tuiTextfieldCleaner]="false"
+            >
+              <input
+                  tuiSelect
+                  [ngModel]="productsPerPage()"
+                  (ngModelChange)="changePageSize($event)"
+              />
+              <tui-data-list-wrapper
+                  *tuiTextfieldDropdown
+                  new
+                  [items]="pageSizes"
+              />
+            </tui-textfield>
+          </div>
+
+          <div class="pagination-wrapper">
+            <tui-pagination
+                [index]="selectedPage()-1"
+                [length]="pageCount()"
+                (indexChange)="goToPage($event)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
