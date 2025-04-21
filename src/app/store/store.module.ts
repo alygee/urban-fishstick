@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ModelModule } from '../model/model.module';
 import { StoreComponent } from './store.component';
+import { CartSummaryComponent } from './cartSummary.component';
+import { CartDetailComponent } from './cartDetail.component';
 import { CounterDirective } from './counter.directive';
 import {
   TuiButton,
@@ -13,7 +15,6 @@ import {
   TuiLink,
   TuiTitle,
   TuiGroup,
-  tuiItemsHandlersProvider,
   TuiTextfield,
 } from '@taiga-ui/core';
 import {
@@ -61,7 +62,12 @@ import { TuiHeader, TuiCell } from '@taiga-ui/layout';
     TuiSelect,
     TuiTextfield,
   ],
-  declarations: [StoreComponent, CounterDirective],
+  declarations: [
+    StoreComponent,
+    CounterDirective,
+    CartSummaryComponent,
+    CartDetailComponent,
+  ],
   exports: [StoreComponent],
 })
 export class StoreModule {}

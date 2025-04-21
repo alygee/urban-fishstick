@@ -3,11 +3,7 @@ import { Product } from '../model/product.model';
 import { ProductRepository } from '../model/product.repository';
 import { FormControl, FormGroup } from '@angular/forms';
 import { tuiItemsHandlersProvider } from '@taiga-ui/core';
-
-interface PageSize {
-  readonly value: number;
-  readonly label: string;
-}
+import { Cart } from '../model/cart.model';
 
 @Component({
   standalone: false,
@@ -40,7 +36,10 @@ export class StoreComponent {
     categoryValue: new FormControl('home'),
   });
 
-  constructor(private repository: ProductRepository) {
+  constructor(
+    private repository: ProductRepository,
+    private cart: Cart,
+  ) {
     this.products = computed(() => {
       if (this.selectedCategory() == undefined) {
         return this.repository.products();
@@ -88,7 +87,7 @@ export class StoreComponent {
     this.changePage(1);
   }
 
-  piu(cat: any) {
-    console.log(cat);
+  addProductToCart(product: Product) {
+    this.cart.addLine(product);
   }
 }

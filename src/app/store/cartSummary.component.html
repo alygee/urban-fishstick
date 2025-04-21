@@ -1,0 +1,19 @@
+<div class="text-base">
+  Your cart:
+  <span *ngIf="cart.summary().itemCount > 0">
+    {{ cart.summary().itemCount }} item(s)
+    {{ cart.summary().cartPrice | currency: "USD" : "symbol" : "2.2-2" }}
+  </span>
+  <span *ngIf="cart.summary().itemCount == 0"> (empty) </span>
+  <button
+    size="s"
+    tuiButton
+    type="button"
+    iconStart="@tui.shopping-cart"
+    tuiIconButton
+    [disabled]="cart.summary().itemCount == 0"
+    (click)="navgiateToCart($event)"
+  >
+    Cart
+  </button>
+</div>

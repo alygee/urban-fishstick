@@ -5,12 +5,7 @@
             <h5>Sports Store</h5>
         </hgroup>
         <aside tuiAccessories>
-            <tui-badge-notification>1</tui-badge-notification>
-            <tui-icon tuiTooltip="Angular kit" />
-            <tui-avatar
-                appearance="accent"
-                src="@tui.star"
-            />
+        <cart-summary></cart-summary>
         </aside>
     </header>
 
@@ -55,13 +50,22 @@
             {{ product.name }}
             <div tuiSubtitle>{{ product.description }}</div>
           </div>
-          <div>
+          <div tuiTitle>
             <tui-badge
-              appearance="primary"
+              appearance="accent"
               size="l"
             >
               {{ product.price | currency: "USD" : "symbol" : "2.2-2" }}
             </tui-badge>
+            <button
+              tuiButton
+              appearance="flat"
+              size="s"
+              type="button"
+              (click)="addProductToCart(product)"
+            >
+              Add To Cart
+            </button>
             </div>
         </div>
         <div class="pager">
